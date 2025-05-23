@@ -792,7 +792,7 @@
         // Buscar entregas
         async function fetchEntregas() {
             try {
-                const response = await fetch("/api/entregas");
+                const response = await fetch("https://expresso-itaporanga-api.onrender.com/api/entregas");
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.error || `Erro ${response.status}`);
