@@ -771,7 +771,7 @@
         // Inicializar o dashboard
         async function initializeDashboard() {
             try {
-                const statusResponse = await fetch("/auth/status");
+                const statusResponse = await fetch("https://expresso-itaporanga-api.onrender.com/api/auth/status");
                 const statusData = await statusResponse.json();
                 if (!statusData.logged_in) {
                     window.location.href = "/login.html";
