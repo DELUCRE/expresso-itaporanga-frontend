@@ -470,7 +470,7 @@
         
         exportarExcel.addEventListener('click', async function() {
             try {
-                const response = await fetch(`/api/relatorio/excel?data_inicio=${dataInicio.value}&data_fim=${dataFim.value}`);
+                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/api/relatorio/desempenho/excel?data_inicio=${dataInicio.value}&data_fim=${dataFim.value}`);
                 if (!response.ok) {
                     throw new Error('Erro ao gerar relatório Excel');
                 }
@@ -506,14 +506,14 @@
                 }
                 
                 // Carregar dados de desempenho
-                const desempenhoResponse = await fetch(`/api/relatorio/desempenho?data_inicio=${dataInicio.value}&data_fim=${dataFim.value}`);
+                const desempenhoResponse = await fetch(`https://expresso-itaporanga-api.onrender.com/api/relatorio/desempenho?data_inicio=${dataInicio.value}&data_fim=${dataFim.value}`);
                 if (!desempenhoResponse.ok) {
                     throw new Error('Erro ao carregar dados de desempenho');
                 }
                 const desempenhoData = await desempenhoResponse.json();
                 
                 // Carregar dados de qualidade
-                const qualidadeResponse = await fetch(`/api/relatorio/qualidade?data_inicio=${dataInicio.value}&data_fim=${dataFim.value}`);
+                const qualidadeResponse = await fetch(`https://expresso-itaporanga-api.onrender.com/api/relatorio/desempenho?data_inicio=${dataInicio.value}&data_fim=${dataFim.value}`);
                 if (!qualidadeResponse.ok) {
                     throw new Error('Erro ao carregar dados de qualidade');
                 }
