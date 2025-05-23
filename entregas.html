@@ -872,7 +872,7 @@
         // Mostrar detalhes da entrega
         async function showDeliveryDetails(codigoRastreio) {
             try {
-                const response = await fetch(`/api/entregas/${codigoRastreio}`);
+                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/api/entregas${codigoRastreio}`);
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.error || `Erro ${response.status}`);
