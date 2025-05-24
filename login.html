@@ -64,45 +64,38 @@
     </div>
 
     <script>
-        const loginForm = document.getElementById('login-form');
-        const messageArea = document.getElementById('message-area');
-
-        loginForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            messageArea.style.display = 'none';
-            messageArea.className = 'message'; // Reset class
-
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            try {
-                const response = await fetch('https://expresso-itaporanga-api.onrender.com/auth/login', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password })
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || `Erro ${response.status}`);
-                }
-
-                // Login bem-sucedido
-                messageArea.textContent = 'Login realizado com sucesso! Redirecionando...';
-                messageArea.classList.add('success');
-                messageArea.style.display = 'block';
-                // Redireciona para a página principal após um pequeno atraso
-                setTimeout(() => {
-                    window.location.href = '/entregas.html'; // Ou a página principal desejada após login (que era o index.html do painel)
-                }, 1500);
-
-            } catch (error) {
-                messageArea.textContent = `Erro no login: ${error.message}`;
-                messageArea.classList.add('error');
-                messageArea.style.display = 'block';
-            }
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    try {
+        const response = await fetch('https://expresso-itaporanga-api.onrender.com/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value
+            })
         });
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Login bem-sucedido:', data);
+            window.location.href = 'entregas.html';
+        } else {
+            const errorData = await response.json();
+            console.error('Erro no login:', errorData);
+            document.getElementById('loginError').textContent = errorData.error || 'Usuário ou senha inválidos';
+            document.getElementById('loginError').style.display = 'block';
+        }
+    } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        document.getElementById('loginError').textContent = 'Erro ao conectar com o servidor. Tente novamente.';
+        document.getElementById('loginError').style.display = 'block';
+    }
+});
+
     </script>
     <footer>
         <p>Expresso Itaporanga - Servir com paixão, viver como exemplo!</p>
