@@ -1177,5 +1177,26 @@
         // Inicializar dashboard quando a página carregar
         document.addEventListener("DOMContentLoaded", initializeDashboard);
     </script>
+    <script>
+  function initializeDashboard() {
+    fetch("https://expresso-itaporanga-api.onrender.com/api/auth/status")
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(HTTP error! status: ${response.status});
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Status de autenticação:", data);
+        // Continue com outras chamadas ou carregamento de dados aqui...
+      })
+      .catch(error => {
+        console.error("Erro ao inicializar dashboard:", error.message);
+      });
+  }
+
+  // Inicia ao carregar a página
+  window.onload = initializeDashboard;
+</script>
 </body>
 </html>
