@@ -771,7 +771,7 @@
         // Inicializar o dashboard
         async function initializeDashboard() {
             try {
-                const statusResponse = await fetch("https://expresso-itaporanga-api.onrender.com/api/auth/status");
+                const statusResponse = await fetch("https://expresso-itaporanga-api.onrender.com/auth/status");
                 const statusData = await statusResponse.json();
                 if (!statusData.logged_in) {
                     window.location.href = "/login.html";
@@ -792,7 +792,7 @@
         // Buscar entregas
         async function fetchEntregas() {
             try {
-                const response = await fetch("https://expresso-itaporanga-api.onrender.com/api/entregas");
+                const response = await fetch("https://expresso-itaporanga-api.onrender.com/entregas");
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.error || `Erro ${response.status}`);
@@ -872,7 +872,7 @@
         // Mostrar detalhes da entrega
         async function showDeliveryDetails(codigoRastreio) {
             try {
-                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/api/entregas/${codigoRastreio}`);
+                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/entregas/${codigoRastreio}`);
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.error || `Erro ${response.status}`);
@@ -931,7 +931,7 @@
         // Carregar histórico de status
         async function loadStatusHistory(entregaId) {
             try {
-                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/api/entregas/${entregaId}/historico`);
+                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/entregas/${entregaId}/historico`);
                 
                 // Verificar se a resposta é JSON válido
                 const contentType = response.headers.get("content-type");
@@ -987,7 +987,7 @@
         // Carregar lista de motoristas
         async function loadMotoristas(motoristaIdSelecionado) {
             try {
-                const response = await fetch('https://expresso-itaporanga-api.onrender.com/api/usuarios?perfil=motorista');
+                const response = await fetch('https://expresso-itaporanga-api.onrender.com/usuarios?perfil=motorista');
                 
                 // Verificar se a resposta é JSON válido
                 const contentType = response.headers.get("content-type");
@@ -1089,7 +1089,7 @@
             };
             
             try {
-                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/api/entregas/${currentEntrega.codigo_rastreio}`, {
+                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/entregas/${currentEntrega.codigo_rastreio}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1133,7 +1133,7 @@
             }
             
             try {
-                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/api/entregas/${currentEntrega.codigo_rastreio}/status`, {
+                const response = await fetch(`https://expresso-itaporanga-api.onrender.com/entregas/${currentEntrega.codigo_rastreio}/status`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -1164,7 +1164,7 @@
 
         // Função de logout
         function logout() {
-            fetch("https://expresso-itaporanga-api.onrender.com/api/auth/logout", { method: "POST" })
+            fetch("https://expresso-itaporanga-api.onrender.com/auth/logout", { method: "POST" })
                 .then(() => {
                     window.location.href = "/login.html";
                 })
@@ -1179,7 +1179,7 @@
     </script>
     <script>
   function initializeDashboard() {
-    fetch("https://expresso-itaporanga-api.onrender.com/api/auth/status")
+    fetch("https://expresso-itaporanga-api.onrender.com/auth/status")
       .then(response => {
         if (!response.ok) {
           throw new Error(HTTP error! status: ${response.status});
@@ -1198,7 +1198,7 @@
   // Inicia ao carregar a página
   window.onload = initializeDashboard;
 
-fetch('https://expresso-itaporanga-api.onrender.com/api/entregas')
+fetch('https://expresso-itaporanga-api.onrender.com/entregas')
   .then(response => {
     if (!response.ok) {
       throw new Error(Erro HTTP: ${response.status});
